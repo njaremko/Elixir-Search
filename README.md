@@ -1,19 +1,10 @@
 # Search
 
-**TODO: Add description**
+This is a multi-threaded file search that behaves similarly to unix's ```find``` command
+
+Currently only supports --name (explicit with no wildcard or expressions) and selecting directory on run.
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
-
-  1. Add search to your list of dependencies in `mix.exs`:
-
-        def deps do
-          [{:search, "~> 0.0.1"}]
-        end
-
-  2. Ensure search is started before your application:
-
-        def application do
-          [applications: [:search]]
-        end
+Not avalible on hex because it's not faster than regular unix ```find```
+I don't image it will ever be as fast, but the current speed isn't too bad.
