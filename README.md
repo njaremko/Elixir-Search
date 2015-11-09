@@ -13,4 +13,6 @@ or
 ## Installation
 
 Not avalible on hex because it's not faster than regular unix ```find```
-I don't image it will ever be as fast, but the current speed isn't too bad.
+I don't imagine it will ever be as fast, but the current speed isn't too bad.
+
+```mix escript.build```
