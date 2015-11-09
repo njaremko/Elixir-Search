@@ -1,16 +1,18 @@
 defmodule Search do
-  def search() do
-    files = elem(File.ls, 1)
-    Enum.map(files, fn(file) -> IO.puts file end)
-  end
-
-  def recursive_search(path \\ ".") do
+  def recursive_search(target \\ "_", path \\ ".") do
     files = elem(File.ls(path), 1)
+
     Parallel.pmap(files, fn(file) ->
-      if File.dir?(path<>"/"<>file) do
-        recursive_search(path<>"/"<>file<>"/")
+      total_path = path<>"/"<>file
+      if File.dir?(total_path) do
+        recursive_search(target, total_path)
       else
-        IO.puts file
+        if target == "_" do
+          IO.puts(total_path)
+        end
+        if target == file do
+          IO.puts(total_path)
+        end
       end end)
   end
 end

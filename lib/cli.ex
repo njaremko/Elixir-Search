@@ -5,24 +5,15 @@ defmodule CLI do
 
   defp parse_args(args) do
     options = OptionParser.parse(args,
-    switches: [name: :string, help: :boolean]
+    strict: [name: :string, help: :boolean]
     )
 
     case options do
-      {_, ["."], _} -> :all
-      {[recursive: true], _, _} ->  :recursive
       {[name: name], _, _} -> options
+      {_, ["."], _} -> options
       {[help: true], _, _} -> :help
-      _ -> IO.puts options
+      _ -> :help
     end
-  end
-
-  def process(:all) do
-    Search.search
-  end
-
-  def process(:recursive) do
-    Search.recursive_search
   end
 
   def process(:help) do
@@ -32,7 +23,6 @@ defmodule CLI do
 
     Options:
     --name       Specify file name
-    --recursive  Do search recursively from current directory
     --help       Show this help message.
 
     Description:
@@ -42,7 +32,14 @@ defmodule CLI do
     System.halt(0)
   end
 
-  def process(name) do
-    IO.puts "Hello, #{name}! You're awesome!!"
+  def process(options) do
+    params = elem(options,0)
+    directory = elem(options,1)
+    if params[:name] do
+      Search.recursive_search(params[:name], List.first(directory))
+    else
+      Search.recursive_search("_", List.first(directory))
+    end
   end
+
 end
