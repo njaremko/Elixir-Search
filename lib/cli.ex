@@ -22,7 +22,7 @@ defmodule CLI do
   end
 
   def process(:recursive) do
-    Search.test
+    Search.recursive_search
   end
 
   def process(:help) do
